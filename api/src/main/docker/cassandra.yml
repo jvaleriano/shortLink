@@ -2,8 +2,6 @@ version: '2'
 services:
   api-cassandra:
     image: cassandra:3.11.5
-    # volumes:
-    #     - ~/volumes/jhipster/api/cassandra/:/var/lib/cassandra/data
     ports:
       - 7000:7000
       - 7001:7001

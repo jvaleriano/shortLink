@@ -54,7 +54,6 @@ public class ShortLink implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
