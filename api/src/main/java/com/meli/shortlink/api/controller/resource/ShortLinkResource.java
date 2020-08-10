@@ -6,7 +6,6 @@ import com.meli.shortlink.api.service.ShortLinkService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +24,6 @@ import java.util.UUID;
 public class ShortLinkResource {
 
     private final Logger log = LoggerFactory.getLogger(ShortLinkResource.class);
-
-    private static final String ENTITY_NAME = "shortLink";
 
     private final ShortLinkService shortLinkService;
 
@@ -93,7 +90,7 @@ public class ShortLinkResource {
     public ResponseEntity<ShortLink> getShortLink(@PathVariable UUID id) {
         log.debug("REST request to get ShortLink : {}", id);
         Optional<ShortLink> shortLink = shortLinkService.findOne(id);
-        return ResponseEntity.notFound().build();
+        return shortLink.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     /**
