@@ -21,9 +21,7 @@ import java.util.UUID;
  * REST controller for managing {@link com.meli.shortlink.api.domain.ShortLink}.
  */
 @RestController
-@RequestMapping(value = "/api",
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api")
 public class ShortLinkResource {
 
     private final Logger log = LoggerFactory.getLogger(ShortLinkResource.class);
