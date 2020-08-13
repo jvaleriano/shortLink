@@ -1,10 +1,12 @@
 package com.meli.shortlink.api.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * A ShortLink.
@@ -12,43 +14,34 @@ import java.util.UUID;
 @Table("shortLink")
 public class ShortLink implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -7619806471472905294L;
 
-    @Id
-    private UUID id;
 
-    private String shortUrl;
+    @PrimaryKey
+    private String id;
 
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9]*$")
     private String url;
 
-    public UUID getId() {
+    public ShortLink() {
+    }
+
+    public ShortLink(String id, String url) {
+        this.id = id;
+        this.url = url;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getShortUrl() {
-        return shortUrl;
-    }
-
-    public ShortLink shortUrl(String shortUrl) {
-        this.shortUrl = shortUrl;
-        return this;
-    }
-
-    public void setShortUrl(String shortUrl) {
-        this.shortUrl = shortUrl;
     }
 
     public String getUrl() {
         return url;
-    }
-
-    public ShortLink url(String url) {
-        this.url = url;
-        return this;
     }
 
     public void setUrl(String url) {
@@ -68,16 +61,8 @@ public class ShortLink implements Serializable {
 
     @Override
     public int hashCode() {
-        return 31;
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "ShortLink{" +
-            "id=" + getId() +
-            ", shortUrl='" + getShortUrl() + "'" +
-            ", url='" + getUrl() + "'" +
-            "}";
+        int result = id.hashCode();
+        result = 31 * result + url.hashCode();
+        return result;
     }
 }

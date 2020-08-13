@@ -4,7 +4,6 @@ import com.meli.shortlink.api.domain.ShortLink;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Service Interface for managing {@link ShortLink}.
@@ -20,6 +19,14 @@ public interface ShortLinkService {
     ShortLink save(ShortLink shortLink);
 
     /**
+     * Create a shortLink.
+     *
+     * @param url to create shortLink.
+     * @return the persisted entity.
+     */
+    ShortLink create(String url);
+
+    /**
      * Get all the shortLinks.
      *
      * @return the list of entities.
@@ -33,12 +40,12 @@ public interface ShortLinkService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<ShortLink> findOne(UUID id);
+    Optional<ShortLink> findOne(String id);
 
     /**
      * Delete the "id" shortLink.
      *
      * @param id the id of the entity.
      */
-    void delete(UUID id);
+    void delete(String id);
 }

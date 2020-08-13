@@ -1,7 +1,6 @@
 
 CREATE TABLE IF NOT EXISTS shortLink (
-    id uuid,
-    shortUrl text,
+    id text,
     url text,
     PRIMARY KEY(id)
 );

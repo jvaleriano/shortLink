@@ -6,7 +6,6 @@ import com.meli.shortlink.api.service.ShortLinkService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +14,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * REST controller for managing {@link com.meli.shortlink.api.domain.ShortLink}.
@@ -45,8 +43,7 @@ public class ShortLinkResource {
         if (shortLink.getId() != null) {
             throw new BadRequestException("shortLinkId","A new shortLink cannot already have an ID");
         }
-        shortLink.setId(UUID.randomUUID());
-        ShortLink result = shortLinkService.save(shortLink);
+        ShortLink result = shortLinkService.create(shortLink.getUrl());
         return ResponseEntity.created(new URI("/api/short-links/" + result.getId()))
             .body(result);
     }
@@ -88,7 +85,7 @@ public class ShortLinkResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the shortLink, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/short-links/{id}")
-    public ResponseEntity<ShortLink> getShortLink(@PathVariable UUID id) {
+    public ResponseEntity<ShortLink> getShortLink(@PathVariable String id) {
         log.debug("REST request to get ShortLink : {}", id);
         Optional<ShortLink> shortLink = shortLinkService.findOne(id);
         return shortLink.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
@@ -101,7 +98,7 @@ public class ShortLinkResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/short-links/{id}")
-    public ResponseEntity<Void> deleteShortLink(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteShortLink(@PathVariable String id) {
         log.debug("REST request to delete ShortLink : {}", id);
         shortLinkService.delete(id);
         return ResponseEntity.noContent().build();
