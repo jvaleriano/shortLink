@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ShortLinkResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/short-links")
-    public ResponseEntity<ShortLink> createShortLink(@RequestBody ShortLink shortLink) throws URISyntaxException {
+    public ResponseEntity<ShortLink> createShortLink(@RequestBody @Valid ShortLink shortLink) throws URISyntaxException {
         log.debug("REST request to save ShortLink : {}", shortLink);
         if (shortLink.getId() != null) {
             throw new BadRequestException("shortLinkId","A new shortLink cannot already have an ID");

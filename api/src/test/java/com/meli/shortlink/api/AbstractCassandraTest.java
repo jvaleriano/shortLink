@@ -52,7 +52,7 @@ public class AbstractCassandraTest {
             Session session = cluster.connect();
             createTestKeyspace(session);
             CQLDataLoader dataLoader = new CQLDataLoader(session);
-            applyScripts(dataLoader, "config/cql/changelog/", "*.cql");
+            applyScripts(dataLoader, "cql/changelog/", "*.cql");
             started = true;
         }
     }
@@ -74,7 +74,8 @@ public class AbstractCassandraTest {
     }
 
     private static void applyScripts(CQLDataLoader dataLoader, String cqlDir, String pattern) throws IOException, URISyntaxException {
-        URL dirUrl = ClassLoader.getSystemResource(cqlDir);
+
+        URL dirUrl = new URL(ClassLoader.getSystemResource("./").toString().replace("test-classes","classes")+ cqlDir);
         if (dirUrl == null) { // protect for empty directory
             return;
         }
