@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Profile("test")
-public class CassandraConfigurationIT extends CassandraConfiguration {
+public class CassandraConfigurationTest extends CassandraConfiguration {
 
     /**
      * Override how to get the port to connect to the Cassandra cluster.
