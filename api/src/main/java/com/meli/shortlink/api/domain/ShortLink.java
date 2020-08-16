@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * A ShortLink.
  */
-@Table("shortLink")
+@Table("short_link")
 public class ShortLink implements Serializable {
 
     private static final long serialVersionUID = -7619806471472905294L;
