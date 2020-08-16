@@ -26,29 +26,29 @@ import javax.inject.Inject;
  */
 public class ShortLinkDaoProducer {
 
-  private final ShortLinkDao shortLinkDao;
+    private final ShortLinkDao shortLinkDao;
 
-  private final ShortLinkDaoReactive shortLinkDaoReactive;
-
-
-  @Inject
-  public ShortLinkDaoProducer(QuarkusCqlSession session) {
-    ShortLinkMapper mapper = new ShortLinkMapperBuilder(session).build();
-    shortLinkDao = mapper.shortLinkDao();
-    shortLinkDaoReactive = mapper.shortLinkDaoReactive();
-  }
+    private final ShortLinkDaoReactive shortLinkDaoReactive;
 
 
-  @Produces
-  @ApplicationScoped
-  ShortLinkDao produceShortLinkDao() {
-    return shortLinkDao;
-  }
+    @Inject
+    public ShortLinkDaoProducer(QuarkusCqlSession session) {
+        ShortLinkMapper mapper = new ShortLinkMapperBuilder(session).build();
+        shortLinkDao = mapper.shortLinkDao();
+        shortLinkDaoReactive = mapper.shortLinkDaoReactive();
+    }
 
-  @Produces
-  @ApplicationScoped
-  ShortLinkDaoReactive produceShortLinkDaoReactive() {
-    return shortLinkDaoReactive;
-  }
+
+    @Produces
+    @ApplicationScoped
+    public ShortLinkDao produceShortLinkDao() {
+        return shortLinkDao;
+    }
+
+    @Produces
+    @ApplicationScoped
+    public ShortLinkDaoReactive produceShortLinkDaoReactive() {
+        return shortLinkDaoReactive;
+    }
 
 }

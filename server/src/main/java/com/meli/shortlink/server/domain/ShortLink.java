@@ -12,12 +12,11 @@ import java.io.Serializable;
 public class ShortLink implements Serializable {
 
     private static final long serialVersionUID = -7619806471472905294L;
-
-
+    
     @PartitionKey
     private String id;
 
-   private String url;
+    private String url;
 
     public ShortLink() {
     }

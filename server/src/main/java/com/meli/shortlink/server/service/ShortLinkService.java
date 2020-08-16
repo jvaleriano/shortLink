@@ -5,15 +5,14 @@ import com.meli.shortlink.server.repository.ShortLinkDao;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.List;
 
 @ApplicationScoped
 public class ShortLinkService {
 
     @Inject
-    ShortLinkDao dao;
+    private ShortLinkDao dao;
 
-    public List<ShortLink> get(String id) {
-        return dao.findById(id).all();
+    public ShortLink get(String id) {
+        return dao.findById(id);
     }
 }
