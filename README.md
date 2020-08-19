@@ -1,4 +1,4 @@
-# shortLink
+# ShortLink
 
 
 Debido a  los requerimientos de performance la arquitectura se dividió en dos ShortLink Api y Shortlink Server
@@ -15,6 +15,7 @@ La arquitectura es un servicio de redireccionamiento desarrollado sobre Quarkus 
 
 Manteniendo en ambos proyectos un mismo lenguaje de programación aunque diferentes frameworks y runtimes. 
 
+# Base de datos
 Para la base de datos utilizada por ambos componentes se decidió utilizar cassandra debido a ser una base de datos key value muy eficiente, tener capacidad de crecimiento horizontal y poseer buenas capacidades de fault tolerance.
 
 
