@@ -10,8 +10,13 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class ShortLinkReactiveService {
 
+
+    private final ShortLinkDaoReactive dao;
+
     @Inject
-    ShortLinkDaoReactive dao;
+    public ShortLinkReactiveService(ShortLinkDaoReactive dao) {
+        this.dao = dao;
+    }
 
     public Multi<ShortLink> get(String id) {
         return dao.findById(id);

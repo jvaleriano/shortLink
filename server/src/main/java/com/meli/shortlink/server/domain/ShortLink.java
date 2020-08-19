@@ -3,16 +3,12 @@ package com.meli.shortlink.server.domain;
 import com.datastax.oss.driver.api.mapper.annotations.Entity;
 import com.datastax.oss.driver.api.mapper.annotations.PartitionKey;
 
-import java.io.Serializable;
-
 /**
  * A ShortLink.
  */
 @Entity()
-public class ShortLink implements Serializable {
+public class ShortLink {
 
-    private static final long serialVersionUID = -7619806471472905294L;
-    
     @PartitionKey
     private String id;
 

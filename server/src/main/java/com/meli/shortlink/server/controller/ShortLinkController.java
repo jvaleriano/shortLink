@@ -10,18 +10,26 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 
 @Path("/")
 public class ShortLinkController {
 
+    private final ShortLinkService shortLinkService;
+
     @Inject
-    private ShortLinkService shortLinkService;
+    public ShortLinkController(ShortLinkService shortLinkService) {
+        this.shortLinkService = shortLinkService;
+    }
 
     @GET
     @Path("/{id}")
     public Response getAll(@PathParam String id) throws URISyntaxException {
-        ShortLink list = shortLinkService.get(id);
-        return Response.seeOther(new URI(list.getUrl())).build();
+        ShortLink shortLink = shortLinkService.get(id);
+        if(Objects.isNull(shortLink)){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.seeOther(new URI(shortLink.getUrl())).build();
     }
 
 }

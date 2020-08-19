@@ -9,8 +9,12 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class ShortLinkService {
 
+    private final ShortLinkDao dao;
+
     @Inject
-    private ShortLinkDao dao;
+    public ShortLinkService(ShortLinkDao dao) {
+        this.dao = dao;
+    }
 
     public ShortLink get(String id) {
         return dao.findById(id);

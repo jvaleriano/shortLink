@@ -15,14 +15,18 @@ import java.net.URISyntaxException;
 // TODO: finish reactive impl
 public class ShortLinkReactiveController {
 
+    private final ShortLinkReactiveService shortLinkService;
+
     @Inject
-    private ShortLinkReactiveService fruitService;
+    public ShortLinkReactiveController(ShortLinkReactiveService shortLinkService) {
+        this.shortLinkService = shortLinkService;
+    }
 
     @GET
     @Path("/{id}")
     public Publisher redirect(@PathParam String id) {
         System.out.println("search: " + id);
-        return Multi.createFrom().publisher(fruitService.get(id)).map(
+        return Multi.createFrom().publisher(shortLinkService.get(id)).map(
                 item -> {
                     try {
                         System.out.println(item.getUrl());

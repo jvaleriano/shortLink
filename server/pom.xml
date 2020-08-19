@@ -61,6 +61,12 @@
       <groupId>com.datastax.oss</groupId>
       <artifactId>java-driver-query-builder</artifactId>
       <version>${com.datastax.oss.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
@@ -77,6 +83,8 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-mutiny</artifactId>
     </dependency>
+
+
   </dependencies>
   <build>
     <plugins>
@@ -154,6 +162,7 @@
       </build>
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
+<!--        <quarkus.native.additional-build-args>-H:+ReportExceptionStackTraces</quarkus.native.additional-build-args>-->
       </properties>
     </profile>
   </profiles>
