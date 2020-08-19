@@ -2,6 +2,8 @@ package com.meli.shortlink.server.controller;
 
 import com.meli.shortlink.server.domain.ShortLink;
 import com.meli.shortlink.server.service.ShortLinkService;
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.inject.Inject;
@@ -24,6 +26,7 @@ public class ShortLinkController {
 
     @GET
     @Path("/{id}")
+    @Timed(name = "checksTime", description = "A measure of how long it takes each request", unit = MetricUnits.MILLISECONDS)
     public Response getAll(@PathParam String id) throws URISyntaxException {
         ShortLink shortLink = shortLinkService.get(id);
         if(Objects.isNull(shortLink)){
